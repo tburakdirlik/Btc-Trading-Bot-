@@ -201,6 +201,59 @@ time.sleep(3600)  # Change 1800 to 3600 for 1 hour
 
 ---
 
+
+# 📊 Proje Analizi ve Geliştirme Yol Haritası
+
+Bu belge, **Bitcoin Haftalık Trading Botu**'nun teknik ve finansal değerlendirmesini, güçlü yanlarını, risklerini ve planlanan geliştirme aşamalarını içermektedir.
+
+---
+
+## 🛡️ Teknik Mimari İncelemesi
+
+* **Modüler Yapı:** Kod mantığı; veri çekme, indikatör hesaplama, sinyal üretme ve bildirim modülleri olarak temiz bir şekilde ayrılmıştır.
+* **Hata Yönetimi:** Binance API ve Telegram bağlantıları için uygulanan `try-except` blokları ve yeniden deneme (retry) mekanizmaları, botun çökmesini engeller ve yüksek çalışma süresi sağlar.
+* **İzlenebilirlik:** Kapsamlı loglama yapısı, botun verdiği her kararı ve yaptığı her hesaplamayı takip etmeyi sağlayarak işlem sonrası analizi kolaylaştırır.
+* **Teknoloji Yığını:** Endüstri standardı olan `ccxt`, `pandas` ve `ta` kütüphaneleri üzerine inşa edilmiştir.
+
+---
+
+## ⚖️ Finansal Strateji Analizi
+
+Bot, haftalık %1.5 hedefiyle **Muhafazakar "Az İşlem, Yüksek Kalite"** mantığını izler.
+
+### ✅ Güçlü Yanlar
+* **Sinyal Onayı (Confluence):** RSI, Bollinger Bantları, MACD, EMA ve Hacim göstergelerinden oluşan 5'li sistemde 4/5 onay aranması, piyasadaki "gürültüyü" (noise) etkili bir şekilde filtreler.
+* **Volatiliteye Dayalı Risk:** Stop-loss hesaplamasında **ATR (Average True Range)** kullanılması, sabit yüzdeler yerine piyasa oynaklığına göre dinamik koruma sağlayan profesyonel bir yaklaşımdır.
+* **Psikolojik Disiplin:** Haftalık %1.5 hedefine ulaşıldığında botun durması, "aşırı işlem" (overtrading) yapmayı ve açgözlülüğü engeller.
+
+### ⚠️ Tespit Edilen Riskler
+* **Fırsat Maliyeti:** Sabit %1.5 hedefi, Bitcoin'in sert yükseldiği (ralli) dönemlerde kârı erken realize edip masada para bırakılmasına neden olabilir.
+* **Zaman Kısıtlaması:** Piyasa döngüleri her zaman takvim haftasıyla (Pazartesi-Pazartesi) uyumlu hareket etmeyebilir.
+* **Trend Direnci:** RSI gibi osilatörler güçlü boğa trendlerinde uzun süre "Aşırı Alım" bölgesinde kalabilir, bu da botun erkenden satış sinyali üretmesine yol açabilir.
+* **Risk/Ödül Oranı:** ATR bazlı stop-loss %1.5'ten geniş olduğunda, sistemin kârlı kalması için başarı oranının %65'in üzerinde seyretmesi gerekir.
+
+---
+
+## 🚀 Geliştirme Yol Haritası (Next Steps)
+
+Botu basit bir sinyal üreticiden profesyonel bir sistemine taşımak için planlanan aşamalar:
+
+### 1. İzleyen Stop-Loss (Trailing Stop)
+Hedef %1.5'e ulaştığında işlemden çıkmak yerine, stop seviyesini giriş fiyatına çekip fiyatla birlikte yukarı taşımak. Böylece büyük trendlerden maksimum kâr hedeflenecek.
+
+### 2. Kapsamlı Backtest Sistemi
+Stratejinin 2023-2025 geçmiş verileri üzerinde nasıl performans gösterdiğini ölçmek için bir `backtest.py` scripti geliştirilecek. Bu, gerçek sermaye riske atılmadan önce maksimum düşüş (drawdown) oranını görmemizi sağlayacak.
+
+### 3. Otomatik Emir İletimi (Execution)
+"Sinyal Botu" aşamasından "İşlem Botu" aşamasına geçilerek, Binance üzerinden `exchange.create_order` fonksiyonu ile tam otomatik al-sat altyapısı kurulacak.
+
+### 4. Mum Kapanış Senkronizasyonu
+Sinyallerin "repainting" (mum bitmeden değişen sinyal) kurbanı olmaması için botun sadece saatlik mum kapanışlarında analiz yapması optimize edilecek.
+
+---
+
+> **Not:** Bu analiz geliştirme süreci için bir rehber niteliğindedir. Algoritmik ticaret yüksek finansal risk içerir. Backtest aşaması tamamlanana kadar sinyalleri manuel doğrulamak önerilir.
+
 ### ⚠️ Important Notes
 
 * **Patience is Key:** The bot checks every 30 minutes. It may take days for the perfect signal conditions (4/5 score) to align.
