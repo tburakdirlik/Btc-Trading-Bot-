@@ -259,3 +259,5 @@ Sinyallerin "repainting" (mum bitmeden değişen sinyal) kurbanı olmaması içi
 * **Patience is Key:** The bot checks every 30 minutes. It may take days for the perfect signal conditions (4/5 score) to align.
 * **Logs:** Monitor `bot.log` to see what the bot is doing in the background.
 * **Financial Warning:** This bot generates signals. Past performance (backtesting) does not guarantee future results. Always use proper risk management.
+
+yapılacaklar - backest 5 yıllık, bot memsaj testi 
